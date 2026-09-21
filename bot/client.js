@@ -22,7 +22,7 @@ class BotClient extends Client {
     this.tempVoiceChannels = new Map();
     this.raidTracker = new Map();
     this.messageTracker = new Map();
-    this.config = require('../../config');
+    this.config = require('../config');
   }
 
   async loadCommands() {
