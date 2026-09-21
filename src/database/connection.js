@@ -8,12 +8,19 @@ const connectDB = async () => {
             throw new Error('MONGODB_URI is not defined in environment variables');
         }
         
-        const conn = await mongoose.connect(uri);
-        logger.info(`MongoDB connected: ${conn.connection.host}`);
+        // We add options to avoid some crypto issues during handshake
+        const conn = await mongoose.connect(uri, {
+            autoIndex: false,
+            serverSelectionTimeoutMS: 5000,
+        });
+        logger.info(`MongoDB connected: ${conn.//connection.host}`);
     } catch (error) {
         logger.error(`MongoDB connection error: ${error.message}`);
         throw error;
     }
 };
+
+module.exports = connectDB;
+
 
 module.exports = connectDB;
