@@ -39,7 +39,7 @@ client.on('interactionCreate', async interaction => {
     try {
         await command.execute(interaction);
     } catch (error) {
-        logger.error(`Command Error: ${error.//message}`);
+        logger.error(`Command Error: ${error.message}`);
         await interaction.reply({ content: '❌ A apărut o eroare internă!', ephemeral: true }).catch(() => {});
     }
 });
