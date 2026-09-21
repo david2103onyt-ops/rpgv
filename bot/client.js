@@ -26,7 +26,7 @@ class BotClient extends Client {
   }
 
   async loadCommands() {
-    const commandsPath = path.join(__dirname, '..', 'commands');
+    const commandsPath = path.join(__dirname, 'commands');
     const commandFolders = fs.readdirSync(commandsPath);
 
     for (const folder of commandFolders) {
