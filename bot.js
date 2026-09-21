@@ -64,7 +64,9 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 process.on('uncaughtException', (error) => {
-  logger.error('Uncaught Exception:', error);
+  console.error('CRITICAL UNCAUGHT EXCEPTION:');
+  console.error(error);
+  process.exit(1);
 });
 
 startBot();
