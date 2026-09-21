@@ -40,21 +40,29 @@ async function startBot() {
   try {
     logger.info('Starting Greenville RP Bot...');
 
+    const requiredEnvs = ['DISCORD_TOKEN', 'CLIENT_ID', 'MONGODB_URI', 'ENCRYPTION_KEY'];
+    const missingEnvs = requiredEnvs.filter(env => !process.env[env]);
+
+    if (missingEnvs.length > 0) {
+      throw new Error(`Missing required environment variables: ${missingEnvs.join(', ')}`);
+    }
+
     await connectDB();
     logger.info('Database connected.');
-
+    
     await client.loadCommands();
     logger.info('Commands loaded.');
-
+    
     await client.loadEvents();
     logger.info('Events loaded.');
-
+    
     await deployCommands();
-
+    
     await client.login(config.discord.token);
     logger.info('Bot logged in successfully.');
   } catch (error) {
-    logger.error(`Failed to start bot: ${error.message}`);
+    console.error('FATAL STARTUP ERROR:');
+    console.error(error);
     process.exit(1);
   }
 }
